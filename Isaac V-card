@@ -246,6 +246,7 @@ const styles = StyleSheet.create({
     height: 95,
     width: 185,
     marginLeft: 15,
+    marginTop: 15,
     backgroundColor: '#17A5E2',
     borderRadius: 10,
   },
