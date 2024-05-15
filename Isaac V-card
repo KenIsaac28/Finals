@@ -1,0 +1,325 @@
+import React, { useState, useRef } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, ScrollView, Image, TextInput,useWindowDimensions, FlatList, Linking  } from 'react-native';
+import PhoneCall from 'react-native-phone-call';
+
+const images = [
+  { id: '1', image: require('./assets/senakulo.jpg') },
+  { id: '2', image: require('./assets/makima.jpg') },
+  { id: '3', image: require('./assets/mothersday.jpg') },
+  { id: '4', image: require('./assets/bukasyon.jpg') },
+  { id: '5', image: require('./assets/blooddoation.jpg') },
+  // Add more images as needed
+];
+
+const game = [
+  { id: '1', image: require('./assets/game1.jpeg') },
+  { id: '2', image: require('./assets/game2.jpeg') },
+  { id: '3', image: require('./assets/game3.jpeg') },
+  { id: '4', image: require('./assets/game4.jpeg') },
+  { id: '5', image: require('./assets/game5.jpeg') },
+  // Add more images as needed
+];
+
+
+export default function App() {
+
+  const callNumber = () => {
+const phoneNumber = '09708417397';
+const url = `tel:${phoneNumber}`;
+
+Linking.openURL(url).catch(err => console.error('Failed to open URL:', err));
+};
+
+  const handleImagePress = (url) => {
+    Linking.openURL(url);
+  };
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { width } = useWindowDimensions(); // This hook provides the dimensions of the screen
+
+  const onViewRef = useRef(({ viewableItems }) => {
+    if (viewableItems.length > 0) {
+      setActiveIndex(viewableItems[0].index);
+    }
+  });
+
+  const viewConfigRef = useRef({ viewAreaCoveragePercentThreshold: 50 });
+
+  return (
+    <ScrollView style={{backgroundColor: '#1DBFE2'}}>
+      <View style={{position: 'absolute'}}>
+        <Image source={require('./assets/cover.jpeg')} style={styles.cover}/>
+      </View>
+      <View style = {{flexDirection: 'row'}}>
+        <Image source={require('./assets/FB_IMG_1666239200489.jpg')} style={styles.profile}/>
+        <View styles = {{flexDirection: 'row'}}>
+          <Text style = {styles.header}>John Kenneth Isaac</Text>
+          <Text style = {styles.paragraph}>Web Developer</Text>
+        </View>
+      </View>
+      <View style={{ flexDirection: 'row' }}>
+      <TouchableOpacity onPress={() => handleImagePress('https://www.facebook.com/john.kennethisaac28/')}>
+        <Image source={require('./assets/fb.png')} style={styles.image} />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => handleImagePress('https://www.instagram.com/isaac_kennnnnn/')}>
+        <Image source={require('./assets/insta.png')} style={styles.image2} />
+      </TouchableOpacity>
+    </View>
+      <View style={{flexDirection: 'row'}}>
+        <View style={styles.container}>
+            <View style={{flexDirection:'row'}}>
+              <Image source={require('./assets/mail.png')} style={styles.image3}/>
+              <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 15, marginLeft: 5, color:'white'}}>Email Address</Text>
+            </View>
+          <Text style={styles.paragraph3}>isaacjohnkenneth28@gmail.com</Text>
+        </View>
+        <View style={styles.container}>
+          <View style = {{flexDirection: 'row'}}>
+            <Image source = {require('./assets/phone.png')} style={styles.image3}/>
+            <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 15, marginLeft: 5, color:'white'}}>Mobile Number</Text>
+          </View>
+          <TouchableOpacity onPress={callNumber}>
+        <Text style={styles.phoneNumber}>09708417397</Text>
+        </TouchableOpacity>
+        </View>
+      </View>
+      <View style={{flexDirection: 'row', marginTop: 15}}>
+        <View style={styles.container}>
+          <View style = {{flexDirection: 'row'}}>
+            <Image source={require('./assets/cake.png')} style={styles.image3}/>
+            <Text style={{fontSize: 15, fontWeight: 'bold', marginTop: 15, marginLeft: 10, color:'white'}}>Date of Birth</Text>
+          </View>
+          <Text style={styles.paragraph3}>November 28, 2002</Text>
+        </View>
+        <View style={styles.container}>
+          <View style={{flexDirection: 'row'}}>
+            <Image source={require('./assets/gps.png')} style={styles.image3}/>
+            <Text style = {{fontSize: 15, fontWeight: 'bold', marginTop: 15, marginLeft: 15, color:'white'}}>Location</Text>
+          </View>
+          <Text style={styles.paragraph3}>83 PNR Compound, Brgy. 73, Caloocan City</Text>
+        </View>
+      </View>
+     <Text style = {styles.paragraph2}>Hello, I'm John Kenneth Isaac, a Graphic Designer, Photographer and aspiring Web Developer. I have a lot of experience when it comes to Graphic Designing since I am a member of a Multimedia Ministry for 3 Years. I am also a photographer and I always accept commisions in this kind of field to have an extra income while also focusing on my acads. Check my other personal informations for more details.</Text>
+      <View style={styles.center}>
+        <View style={styles.container2}>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', color: 'white', paddingTop: 15}}>My own Services</Text>
+        </View>
+      </View>
+      <Text style={styles.header2}>Graphic Design</Text>
+      <Text style={styles.paragraph4}>I can make a creative designs when it comes to digital arts. Even though my drawing skills are not that great. I can create a designs in terms of manipulating the aspects of every graphics. Calling cards, Invitations(Birthday, Chirstening, Debuts, etc), Posters, Publicity Materials, Logo, and anything that is graphic related materials.
+      </Text>
+
+      <Text style={styles.header2}>Photography</Text>
+      <Text style={styles.paragraph4}>I can also provide some great pictures at your memorable moments when it comes to photography. I am an experienced photographer for 2 years. I am accepting commisions on photography. Just DM me at my social accounts.</Text>
+
+      <Text style={styles.header2}>Web Developing</Text>
+      <Text style={styles.paragraph4}>Web Developing is my new profession since I am an IT student. I am also accepting commisions on web designing since I have an experience on designing webpages as a front end dev of my team in Capstone.</Text>
+      <View style={styles.center}>
+        <View style={styles.container2}>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', color: 'white', paddingTop: 15}}>Gallery</Text>
+        </View>
+      </View>
+     <View style={{marginTop: 15}}>
+      <FlatList
+        data={images}
+        renderItem={({ item }) => (
+          <Image source={item.image} style={{ width, height: 600 }} />
+        )}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScrollToIndexFailed={info => {
+          console.log("Scroll to index failed:", info);
+        }}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
+        keyExtractor={item => item.id}
+
+      />
+      <View style={styles.pagination}>
+        {images.map((_, index) => (
+          <View
+            key={index}
+            style={[styles.dot, index === activeIndex ? styles.activeDot : null]}
+          />
+        ))}
+      </View>
+    </View>
+    <View style={styles.center}>
+        <View style={styles.container2}>
+          <Text style={{textAlign: 'center', fontWeight: 'bold', color: 'white', paddingTop: 15}}>Personal Favorites</Text>
+        </View>
+      </View>
+      <View style={{marginTop: 15}}>
+      <FlatList
+        data={game}
+        renderItem={({ item }) => (
+            <View style = {styles.container4}>
+              <Text style = {{marginTop: 15, marginLeft: 15, fontSize: 20, fontWeight: 'bold'}}>Favorite Games</Text>
+              <View style = {styles.center}>
+                <Image source={item.image} style={{ width: 310, height: 200, borderRadius: 15 }} />
+              </View>
+            </View>
+        )}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        onScrollToIndexFailed={info => {
+          console.log("Scroll to index failed:", info);
+        }}
+        onViewableItemsChanged={onViewRef.current}
+        viewabilityConfig={viewConfigRef.current}
+        keyExtractor={item => item.id}
+        
+      />
+      <View style={styles.pagination}>
+        {images.map((_, index) => (
+          <View
+            key={index}
+            style={[styles.dot, index === activeIndex ? styles.activeDot : null]}
+          />
+        ))}
+      </View>
+    </View>
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+
+  cover: {
+    height: 200,
+    width: 411,
+  },
+
+  profile: {
+    height: 150,
+    width: 150,
+    borderRadius: 100,
+    borderWidth: 5,
+    borderColor: '#1560BD',
+    marginLeft: 20,
+    marginTop: 110
+  },
+
+  header: {
+    marginTop: 200,
+    marginLeft: 7,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 17
+  },
+
+  paragraph: {
+    marginTop: 5,
+    marginLeft: 7,
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 15
+  },
+
+  image: {
+    height: 50,
+    width: 50,
+    marginLeft: 170
+  },
+
+  image2: {
+    height: 50,
+    width: 50,
+    marginLeft: 15,
+  },
+
+  paragraph2: {
+    textAlign: 'justify',
+    fontSize: 15,
+    color: 'white',
+    padding: 15,
+  },
+
+  container: {
+    height: 95,
+    width: 185,
+    marginLeft: 15,
+    backgroundColor: '#17A5E2',
+    borderRadius: 10,
+  },
+
+  image3: {
+    height: 40,
+    width: 40,
+    marginLeft: 5,
+    marginTop: 5
+  },
+
+  paragraph3: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
+    marginTop: 5
+  },
+
+  container2: {
+    height: 50,
+    width: 200,
+    backgroundColor: '#17A5E2',
+    borderRadius: 30,
+    marginTop: 60,
+  },
+
+  header2: {
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 15
+  },
+
+  paragraph4: {
+    textAlign:'justify',
+    paddingLeft: 15,
+    paddingRight: 15,
+    fontSize: 15,
+    color: 'white',
+    marginTop: 15
+  },
+
+  pagination: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  dot: {
+    height: 10,
+    width: 10,
+    borderRadius: 5,
+    backgroundColor: 'gray',
+    margin: 8,
+  },
+  activeDot: {
+    backgroundColor: 'black',
+  },
+
+  container4: {
+    height: 330,
+    width: 360,
+    backgroundColor: 'white',
+    marginLeft: 15,
+    marginRight: 15,
+    borderRadius: 10
+  },
+
+  phoneNumber: {
+    color: 'white',
+    marginLeft: 50,
+    marginTop: 5
+  }
+  
+});
